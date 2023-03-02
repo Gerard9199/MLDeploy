@@ -2,12 +2,12 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-def save_data(set_name,dataset)
+def save_data(set_name,dataset):
   dataset.to_csv(set_name + ".csv",index=False)
   print("Dataset "+ set_name +".csv listo ...")
  
 
-def fix_data(A,B)
+def fix_data(A,B):
   ds= pd.DataFrame()
   ds= A
   ds['test_result']=B
