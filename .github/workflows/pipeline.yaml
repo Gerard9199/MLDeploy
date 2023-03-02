@@ -69,5 +69,3 @@ jobs:
          docker build . --file Dockerfile --tag  ${{ vars.ECR_REPO_NAME }}:latest
          docker tag ${{ vars.ECR_REPO_NAME }}:latest ${{ vars.ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}.amazonaws.com/${{ vars.ECR_REPO_NAME }}:latest
          docker push  ${{ vars.ACCOUNT_NUMBER }}.dkr.ecr.${{ vars.AWS_DEFAULT_REGION }}.amazonaws.com/${{ vars.ECR_REPO_NAME }}:latest
-      
-    
