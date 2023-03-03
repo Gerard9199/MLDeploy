@@ -3,29 +3,26 @@ import pickle
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
 
+def data_metrics(yP, yL):
+    print(accuracy_score(yP,yL))
+    print(confusion_matrix(yP,yL))
+    print(classification_report(yP,yL))
 
-def training(test_name, filename='mlparams'):
-    log_model = LogisticRegression()
-    df = pd.read_csv(test_name+'.csv')
-    X_train = pd.DataFrame()
-    X_train['age'] = df['age']
-    X_train['physical_score'] = df['physical_score']
-    y= df['test_result']
-    log_model.fit(X_train,y)
-    y_pred = log_model.predict(X_train)
-    
-    pickle.dump(log_model, open(filename, 'wb'))
-    print('Parametros escritos en archivo mlparams')
-    return (y_pred,y)
+def split_data(dataframe_name):
+    df = pd.read_csv(dataframe_name)
+    X_01 = df.drop('test_result',axis=1) 
+    y_01 = df['test_result']
+    return (X_01,y_01)
 
-def accuracy(test, pred):
-    return accuracy_score(test, pred)
+def data_prediction(log_model, X_01):
+    y_01 = log_model.predict(X_01)
+    return y_01
 
-def conf_matrix(test, pred):
-    return confusion_matrix(test, pred)
+def test(test_name, filename='mlparams'):
+    log_test = pickle.load(open(filename, 'rb'))
+    (X,y)=split_data(test_name)
+    y_pred = data_prediction(log_test, X)
+    print('Metricas Validación')
+    data_metrics (y_pred,y)
 
-
-(yP,yL)=training('test')
-print(accuracy(yP,yL))
-print(conf_matrix(yP,yL))
-print(classification_report(yP,yL))
+test('test.csv')
