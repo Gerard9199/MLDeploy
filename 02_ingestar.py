@@ -29,5 +29,5 @@ def split_data(dataframe_name, validation=False, ss=0.1):
   datasets=fix_data(X_test,y_test)
   save_data(setname_02,datasets)
 
-split_data('hearing_test.csv', validation = False, ss = 0.1)
+split_data('hearing_test.csv', validation = False, ss = 0.3)
 split_data('train.csv', validation = True, ss = 0.3)
